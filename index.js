@@ -3,6 +3,8 @@ const fs = require('fs')
 const { Triangle, Circle, Square } = require('./lib/shapes.js')
 const path = require('path')
 
+
+//function to generate SVG
 function generateSVG(text, textColor, shape, shapeColor) {
     let shapeInstance
     switch (shape) {
@@ -24,6 +26,8 @@ function generateSVG(text, textColor, shape, shapeColor) {
     <text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
     </svg>`	.trim()
 }
+
+//function to use inquirer to get user input
 async function promptUser() {
     const userInput = await inquirer.prompt([
         {
@@ -51,6 +55,8 @@ async function promptUser() {
     ])
     return userInput
 }
+
+// main function to run the application
 async function main() {
     const userInput = await promptUser()
     const svgContent = generateSVG(userInput.text, userInput.textColor, userInput.shape, userInput.shapeColor)
@@ -65,5 +71,6 @@ async function main() {
     console.log('Generated logo.svg')
 }
 
+//calling main function
 main()
     .catch(err => console.error(err))
